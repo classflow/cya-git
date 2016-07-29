@@ -65,11 +65,23 @@ function validateKey(key) {
           resolve(false);
         }
       },
-      () => resolve(false))
+      () => resolve(false)
+    )
     .catch(() => {
       resolve(false);
     });
   })
+}
+
+function showOpenIssues() {
+  log('Listing your open issues...');
+  return jiraQuery.getMyOpenIssues().then(issues => {
+    issues
+      .sort((a, b) => {
+        return a.key.localeCompare(b.key);
+      })
+      .map(issue => log(`${issue.key} - ${issue.fields.summary}`));
+  });
 }
 
 const file = process.argv[2];
@@ -85,7 +97,11 @@ if (!key) {
   validateKey(key).then(isValid => {
     if (!isValid) {
       bad(`${key} does not appear to be a valid key.\n`);
-      process.exit(1);
+      function exit() {
+        process.exit(1);
+      }
+
+      showOpenIssues().then(exit, exit).catch(exit);
     } else {
       good('This commit message looks good.\n')
       process.exit(0);

@@ -36,7 +36,6 @@ TODO: Figure out how I want to do this.
 To remove cya-git checks from a project, run `cya-git -r` in the project's root.
 
 ## TODO before 1.0.0 release
-* When a key is invalid, show the user a list of their issues.
 * Allow customization of Jira key regex.
   * Make key check regex case-insensitive.
 
