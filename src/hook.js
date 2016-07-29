@@ -30,21 +30,44 @@ function addHook(hooksDir) {
   const destination = path.join(hooksDir, hookName);
 
   try {
+    console.log(`Installing cya-git hook ${hookName}...`);
     fs.symlinkSync(source, destination);
   } catch (e) {
     if (e.code === 'EEXIST') {
-      console.log('hook already exists');
+      console.log(`${hookName} already exists, nevermind.`);
     }
   }
 }
 
-export default function installHook(dir) {
-  console.log('installing cya-git hook...');
-  const hooksDir = getHooksDir(dir);
+function removeHook(hooksDir) {
+  const hook = path.join(hooksDir, hookName);
 
+  try {
+    console.log(`Removing cya-git hook ${hookName}...`);
+    fs.unlinkSync(hook);
+  } catch (e) {
+    switch (e.code) {
+      case 'ENOENT':
+        console.log(`${hookName} does not exist.`);
+        break;
+      default:
+      console.log(`Unable to remove ${hookName}\n${e}`);
+    }
+  }
+}
+
+export function install(dir) {
+  const hooksDir = getHooksDir(dir);
   if (!hooksDir) {
     hooksDirNotFound();
   } else {
     addHook(hooksDir);
+  }
+}
+
+export function remove(dir) {
+  const hooksDir = getHooksDir(dir);
+  if (hooksDir) {
+    removeHook(hooksDir);
   }
 }

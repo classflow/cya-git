@@ -27,6 +27,9 @@ In the root of any git project, run `cya-git`.  From then on, when you commit,
 the commit message will be checked for a valid Jira issue key prefix.  If not
 found, the commit will be aborted.
 
+### Removal
+
+To remove cya-git checks from a project, run `cya-git -r` in the project's root.
 
 ## TODO
 * Figure out how to make hook wait for user prompts.
