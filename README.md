@@ -32,15 +32,16 @@ found, the commit will be aborted.
 To remove cya-git checks from a project, run `cya-git -r` in the project's root.
 
 ## TODO
-* Figure out how to make hook wait for user prompts.
-* Maintain user-provide info across sessions.
 * Allow customization of Jira key regex.
-* Handle preexisting hooks.  Attempt to append to them when possible.
+
+* Make key check regex case-insensitive.
 * When a key is invalid, show the user a list of their issues.
+* Handle preexisting hooks.  Attempt to append to them when possible.
 * Help the user setup .jira-queryrc.  Create it during installation or provide
 friendly error messages and links.
-* Make key check regex case-insensitive.
 * Add a pretty checkmark if it's good and an ugly x if it's bad.
+* Figure out how to make hook wait for user prompts.
+* Maintain user-provide info across sessions.
 
 ---
 kickstarted by [npm-boom][npm-boom]
