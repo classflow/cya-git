@@ -1,16 +1,13 @@
-# cya-git *WARNING: work in progress!*
+# cya-git
 
-installs a git hook to validate commit messages  
+Check your git commit message for a valid Jira issue key.  
 version: [unreleased][CHANGELOG]
 
 ## Installation
 
-* clone
-* npm link
-
-## Setup
-
-Create `~/.jira-queryrc`, see [jira-query] for details.  Currently only works
+1. Clone this repo.
+2. `cd cya-git & npm link`
+3. Create `~/.jira-queryrc`, see [jira-query] for details.  Currently only works
 when all info is present.  Hook will not wait for user prompts.
 
 ```json
@@ -29,24 +26,36 @@ found, the commit will be aborted.
 
 ![screen shot 2016-07-29 at 13 39 14](https://cloud.githubusercontent.com/assets/1720010/17259675/3b705926-5592-11e6-90c1-e890288d5c1d.png)
 
+
+### Customizing Key Pattern
+
+TODO: Figure out how I want to do this.
+
 ### Removal
 
 To remove cya-git checks from a project, run `cya-git -r` in the project's root.
 
-## TODO
-* Turn off logging in jira-query 'unable to perform search';
-
-* Allow customization of Jira key regex.
-
-* Make key check regex case-insensitive.
-* Add override option.
-
+## TODO before 1.0.0 release
 * When a key is invalid, show the user a list of their issues.
+* Allow customization of Jira key regex.
+  * Make key check regex case-insensitive.
+
+## TODO
+
+* Add override option.
 * Handle preexisting hooks.  Attempt to append to them when possible.
-* Help the user setup .jira-queryrc.  Create it during installation or provide
-friendly error messages and links.
 * Figure out how to make hook wait for user prompts.
 * Maintain user-provide info across sessions.
+
+
+
+
+
+
+
+
+
+
 
 ---
 kickstarted by [npm-boom][npm-boom]
