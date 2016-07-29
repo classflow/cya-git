@@ -37,9 +37,10 @@ To remove cya-git checks from a project, run `cya-git -r` in the project's root.
 * Allow customization of Jira key regex.
 * Handle preexisting hooks.  Attempt to append to them when possible.
 * When a key is invalid, show the user a list of their issues.
-* Add uninstall option.
 * Help the user setup .jira-queryrc.  Create it during installation or provide
 friendly error messages and links.
+* Make key check regex case-insensitive.
+* Add a pretty checkmark if it's good and an ugly x if it's bad.
 
 ---
 kickstarted by [npm-boom][npm-boom]
