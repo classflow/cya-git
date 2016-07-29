@@ -1,17 +1,11 @@
 #!/usr/bin/env node
 
-console.log('\nrunning commit-msg.js\n');
-
 import fs from 'fs';
-import path from 'path';
 import jiraQuery from 'jira-query';
 
+console.log('\nRunning cya-git check...\n');
+
 function getMessageFromFile(file) {
-  // find git root
-  // console.log();
-  // const gitRoot = path.join(process.cwd(), '.git');
-  // const gitRoot = path.join(__dirname, '../../..');
-  // return fs.readFileSync(path.join(gitRoot, file), 'utf8');
   return fs.readFileSync(file, 'utf8');
 }
 
@@ -23,7 +17,6 @@ function getCodeFromMessage(message) {
 
 function handleMissingCode() {
   console.log('Your commit message is missing the issue code.');
-  console.log('Aborting commit.\n');
   process.exit(1);
 }
 
@@ -49,7 +42,11 @@ if (!code) {
   handleMissingCode();
 } else {
   checkCode(code).then(isValid => {
-    console.log(`The issue key is${isValid ? '' : ' not'} valid.`);
-    process.exit(isValid ? 0 : 1);
+    if (!isValid) {
+      console.log(`${code} does not appear to be valid.`);
+      process.exit(1);
+    } else {
+      process.exit(0);
+    }
   });
 }

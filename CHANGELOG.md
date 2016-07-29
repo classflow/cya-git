@@ -7,4 +7,5 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 - everything
 
-[Unreleased]: https://github.com/classflow/cya-git/compare/1.1.0...HEAD
+[1.0.0]: https://github.com/classflow/cya-git/compare/1.0.0...HEAD
+[Unreleased]: https://github.com/classflow/cya-git
