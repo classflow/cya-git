@@ -16,19 +16,19 @@ function getCodeFromMessage(message) {
 }
 
 function handleMissingCode() {
-  console.log('Your commit message is missing the issue code.');
+  console.log('Your commit message is missing the issue key.');
   process.exit(1);
 }
 
-function checkCode(code) {
+function validateKey(key) {
   return new Promise(resolve => {
-    console.log(`Verifying ${code}...`);
-    const jql = `key=${code} AND resolution=Unresolved`;
+    console.log(`Verifying ${key}...`);
+    const jql = `key=${key} AND resolution=Unresolved`;
     jiraQuery.jql(jql).then(
       () => resolve(true),
       () => resolve(false))
     .catch(() => {
-      console.log(`Issue ${code} was not found.`);
+      console.log(`Issue ${key} was not found.`);
       resolve(false);
     });
   })
@@ -36,14 +36,14 @@ function checkCode(code) {
 
 const file = process.argv[2];
 const message = getMessageFromFile(file);
-const code = getCodeFromMessage(message);
+const key = getCodeFromMessage(message);
 
-if (!code) {
+if (!key) {
   handleMissingCode();
 } else {
-  checkCode(code).then(isValid => {
+  validateKey(key).then(isValid => {
     if (!isValid) {
-      console.log(`${code} does not appear to be valid.`);
+      console.log(`${key} does not appear to be valid.`);
       process.exit(1);
     } else {
       process.exit(0);
