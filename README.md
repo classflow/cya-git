@@ -6,7 +6,6 @@ version: [unreleased][CHANGELOG]
 ## Installation
 
 * clone
-* npm i
 * npm link
 
 ## Setup
@@ -22,13 +21,20 @@ when all info is present.  Hook will not wait for user prompts.
 }
 ```
 
+## Usage
+
+In the root of any git project, run `cya-git`.  From then on, when you commit,
+the commit message will be checked for a valid Jira issue key prefix.  If not
+found, the commit will be aborted.
 
 
 ## TODO
 * Figure out how to make hook wait for user prompts.
 * Maintain user-provide info across sessions.
 * Allow customization of Jira key regex.
-
+* Handle preexisting hooks.  Attempt to append to them when possible.
+* When a key is invalid, show the user a list of their issues.
+* Add uninstall option.
 
 ---
 kickstarted by [npm-boom][npm-boom]
