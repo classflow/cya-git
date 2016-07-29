@@ -24,7 +24,9 @@ In the root of any git project, run `cya-git`.  From then on, when you commit,
 the commit message will be checked for a valid Jira issue key prefix.  If not
 found, the commit will be aborted.
 
-![screen shot 2016-07-29 at 13 39 14](https://cloud.githubusercontent.com/assets/1720010/17259675/3b705926-5592-11e6-90c1-e890288d5c1d.png)
+
+![screenshot]
+
 
 ### Removal
 
@@ -53,3 +55,4 @@ kickstarted by [npm-boom][npm-boom]
 [npm-boom]: https://github.com/reergymerej/npm-boom
 [jira-query]: https://github.com/reergymerej/jira-query#runtime-config
 [CHANGELOG]: CHANGELOG.md
+[screenshot]: https://cloud.githubusercontent.com/assets/1720010/17261614/4fdda9cc-559c-11e6-9aef-1292281a55dd.png
