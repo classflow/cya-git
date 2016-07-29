@@ -35,6 +35,8 @@ found, the commit will be aborted.
 * Handle preexisting hooks.  Attempt to append to them when possible.
 * When a key is invalid, show the user a list of their issues.
 * Add uninstall option.
+* Help the user setup .jira-queryrc.  Create it during installation or provide
+friendly error messages and links.
 
 ---
 kickstarted by [npm-boom][npm-boom]
