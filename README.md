@@ -34,10 +34,7 @@ To remove cya-git checks from a project, run `cya-git -r` in the project's root.
 
 ## In Future Releases
 
-* Add override option.  workaround: `cya-git -r`, commit, `cya-git`.
-* Handle preexisting hooks.  Attempt to append to them when possible.
-* Figure out how to make hook wait for user prompts.
-  * Maintain user-provide info across sessions.
+Check out [the TODOs][todo] to see what's coming in future releases.
 
 
 
@@ -56,3 +53,4 @@ kickstarted by [npm-boom][npm-boom]
 [jira-query]: https://github.com/reergymerej/jira-query#runtime-config
 [CHANGELOG]: CHANGELOG.md
 [screenshot]: https://cloud.githubusercontent.com/assets/1720010/17261614/4fdda9cc-559c-11e6-9aef-1292281a55dd.png
+[todo]: CHANGELOG.md#todo
