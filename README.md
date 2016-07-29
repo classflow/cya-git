@@ -1,7 +1,7 @@
 # cya-git
 
-Check your git commit message for a valid Jira issue key.  
-version: [unreleased][CHANGELOG]
+Check your git commit messages for valid Jira issue keys.  
+version: [1.0.0][CHANGELOG]
 
 ## Installation
 

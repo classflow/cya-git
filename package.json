@@ -1,6 +1,7 @@
 {
   "version": "1.0.0",
   "name": "cya-git",
+  "description": "Check your git commit messages for valid Jira issue keys.",
   "main": "lib/index.js",
   "scripts": {
     "start": "babel-node src/index.js",
