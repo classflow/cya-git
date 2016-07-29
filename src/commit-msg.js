@@ -6,14 +6,16 @@ import colors from 'colors/safe';
 
 console.log('\ncya-git');
 
+// https://confluence.atlassian.com/adminjiraserver070/changing-the-project-key-format-779292263.html
+const jiraKeyFormat = /([A-Z][A-Z_0-9]+-\d+):/g;
+
 function getMessageFromFile(file) {
   return fs.readFileSync(file, 'utf8');
 }
 
-function getCodeFromMessage(message) {
-  const regex = /(\n)?(CF-\d{5,})/g;
-  const matches = regex.exec(message);
-  return matches && matches[2];
+function getKeyFromMessage(message) {
+  const matches = jiraKeyFormat.exec(message);
+  return matches && matches[1];
 }
 
 function log(msg) {
@@ -73,20 +75,41 @@ function validateKey(key) {
   })
 }
 
+function truncate(string, length) {
+  if (string.length > length) {
+    return string.substr(0, length - 3) + '...';
+  } else {
+    return string;
+  }
+}
+
 function showOpenIssues() {
-  log('Listing your open issues...');
+  log('Did you mean to use one of your open issues?');
   return jiraQuery.getMyOpenIssues().then(issues => {
     issues
       .sort((a, b) => {
         return a.key.localeCompare(b.key);
       })
-      .map(issue => log(`${issue.key} - ${issue.fields.summary}`));
+      .map(issue => {
+        const summary = truncate(issue.fields.summary, 60);
+        log(`${issue.key} - ${summary}`);
+      });
+    console.log('\n');
   });
+}
+
+function handleInvalidKey(key) {
+  bad(`${key} does not appear to be a valid key.\n`);
+  function exit() {
+    process.exit(1);
+  }
+
+  showOpenIssues().then(exit, exit).catch(exit);
 }
 
 const file = process.argv[2];
 const message = getMessageFromFile(file);
-const key = getCodeFromMessage(message);
+const key = getKeyFromMessage(message);
 
 logMessage(message);
 
@@ -94,14 +117,10 @@ if (!key) {
   handleMissingCode();
 } else {
   good(`${key} looks like a Jira key.`);
+
   validateKey(key).then(isValid => {
     if (!isValid) {
-      bad(`${key} does not appear to be a valid key.\n`);
-      function exit() {
-        process.exit(1);
-      }
-
-      showOpenIssues().then(exit, exit).catch(exit);
+      handleInvalidKey(key);
     } else {
       good('This commit message looks good.\n')
       process.exit(0);

@@ -26,25 +26,16 @@ found, the commit will be aborted.
 
 ![screen shot 2016-07-29 at 13 39 14](https://cloud.githubusercontent.com/assets/1720010/17259675/3b705926-5592-11e6-90c1-e890288d5c1d.png)
 
-
-### Customizing Key Pattern
-
-TODO: Figure out how I want to do this.
-
 ### Removal
 
 To remove cya-git checks from a project, run `cya-git -r` in the project's root.
 
-## TODO before 1.0.0 release
-* Allow customization of Jira key regex.
-  * Make key check regex case-insensitive.
+## In Future Releases
 
-## TODO
-
-* Add override option.
+* Add override option.  workaround: `cya-git -r`, commit, `cya-git`.
 * Handle preexisting hooks.  Attempt to append to them when possible.
 * Figure out how to make hook wait for user prompts.
-* Maintain user-provide info across sessions.
+  * Maintain user-provide info across sessions.
 
 
 
