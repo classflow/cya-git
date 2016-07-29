@@ -29,7 +29,7 @@ function good(msg) {
 }
 
 function handleMissingCode() {
-  bad('Your commit message is missing the issue key.');
+  bad('Your commit message is missing the issue key.\n');
   process.exit(1);
 }
 
@@ -38,15 +38,33 @@ function logMessage(message) {
   const quote = '\n\t> ';
   parts.unshift('');
   parts.pop();
-  log('Validating message');
-  log(`${parts.join(quote)}\n`);
+  log(`${colors.grey(parts.join(quote))}\n`);
 }
 
 function validateKey(key) {
   return new Promise(resolve => {
-    const jql = `key=${key} AND resolution=Unresolved`;
+    const jql = `key=${key}`;
     jiraQuery.jql(jql).then(
-      () => resolve(true),
+      (issues) => {
+
+        if (issues.length) {
+          good(`${key} exists.`);
+
+          const issue = issues[0];
+          const {resolution} = issue.fields;
+
+          if (!!resolution) {
+            bad(`${key} was already resolved.`);
+            resolve(false);
+          } else {
+            good(`${key} is unresolved.`);
+            resolve(true);
+          }
+        } else {
+          bad(`${key} was not found.`);
+          resolve(false);
+        }
+      },
       () => resolve(false))
     .catch(() => {
       resolve(false);
@@ -66,10 +84,10 @@ if (!key) {
   good(`${key} looks like a Jira key.`);
   validateKey(key).then(isValid => {
     if (!isValid) {
-      bad(`${key} does not appear to be valid.`);
+      bad(`${key} does not appear to be a valid key.\n`);
       process.exit(1);
     } else {
-      good('It\'s valid.')
+      good('This commit message looks good.\n')
       process.exit(0);
     }
   });
