@@ -3,7 +3,7 @@
 import fs from 'fs';
 import jiraQuery from 'jira-query';
 
-console.log('\nRunning cya-git check...\n');
+console.log('\nRunning cya-git check...');
 
 function getMessageFromFile(file) {
   return fs.readFileSync(file, 'utf8');
@@ -16,13 +16,12 @@ function getCodeFromMessage(message) {
 }
 
 function handleMissingCode() {
-  console.log('Your commit message is missing the issue key.');
+  console.log('Your commit message is missing the issue key. :(');
   process.exit(1);
 }
 
 function validateKey(key) {
   return new Promise(resolve => {
-    console.log(`Verifying ${key}...`);
     const jql = `key=${key} AND resolution=Unresolved`;
     jiraQuery.jql(jql).then(
       () => resolve(true),
