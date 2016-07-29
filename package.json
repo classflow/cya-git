@@ -1,0 +1,39 @@
+{
+  "version": "1.0.0",
+  "name": "cya-git",
+  "main": "lib/index.js",
+  "scripts": {
+    "start": "babel-node src/index.js",
+    "lint": "eslint .",
+    "transpile": "babel src -d lib",
+    "chmod": "chmod +x lib/commit-msg.js",
+    "build": "npm run transpile && npm run chmod",
+    "prepublish": "npm run build"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.9.0",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-register": "^6.9.0"
+  },
+  "dependencies": {
+    "jira-query": "^1.0.0"
+  },
+  "license": "ISC",
+  "directories": {
+    "test": "test"
+  },
+  "preferGlobal": "true",
+  "bin": {
+    "cya-git": "lib/index.js"
+  },
+  "description": "installs a git hook to validate commit messages   version: [unreleased][CHANGELOG]",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/classflow/cya-git.git"
+  },
+  "author": "Jeremy Greer <jeremy.greer.atl@gmail.com>",
+  "bugs": {
+    "url": "https://github.com/classflow/cya-git/issues"
+  },
+  "homepage": "https://github.com/classflow/cya-git#readme"
+}
