@@ -10,7 +10,9 @@ console.log('\ncya-git');
 const jiraKeyFormat = /([A-Z][A-Z_0-9]+-\d+):/g;
 
 function getMessageFromFile(file) {
-  return fs.readFileSync(file, 'utf8');
+  const message = fs.readFileSync(file, 'utf8');
+  const ignoredLineRegex = /(\n)?#.*/g;
+  return message.replace(ignoredLineRegex, '');
 }
 
 function getKeyFromMessage(message) {
